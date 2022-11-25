@@ -1,0 +1,46 @@
+{% extends 'observations/base.html' %}
+
+
+{% block content %}
+<header class="entry-header">
+    <h1 class="entry-title">
+        {% if view.for_manager %}
+        Join as a Manager
+        {% else %}
+        Join as a Reviewer
+        {% endif %}
+    </h1>
+    <p>
+        You'll have access to log in and review submissions.
+        {% if view.for_manager %}
+        You can also look over and manage submissions and other people's reviews.
+        {% endif %}
+    </p>
+    <p>
+        Once your account is created you can log in any time at <a href="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% url 'admin:index' %}">{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% url 'admin:index' %}</a>.
+    </p>
+</header><!-- .entry-header -->
+
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+
+    {% for field in form %}
+    <p>
+        <label>
+            {% if field.field.required %}<b>{% endif %}
+                {{ field.label }}
+                {% if field.field.required %}</b>{% endif %}
+            {{ field.errors }}
+            <br>
+            {% if field.help_text %}
+            {{ field.help_text }}
+            <br>
+            {% endif %}
+            {{ field }}
+        </label>
+    </p>
+    {% endfor %}
+    
+    <input type="submit" value="Join">
+</form>
+{% endblock %}

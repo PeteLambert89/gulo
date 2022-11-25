@@ -1,0 +1,119 @@
+--- Intended Functions: ---
+ - Anonymous user observation submission
+    - following function of current form: https://docs.google.com/forms/d/1RLbbL-EzLnnHgtZ5QSXPZHbnWbVE5V6Uhs8sm8-9MNQ/edit?ts=6351b3ea
+ - Review of submission by experts:
+    - "Reviewer methods: We have between 2-4 experts review each observation and categorize it. 
+        If there is consensus on the category than thats what it is. If there is any disagreement, 
+        reviews discuss their thought process. If this leads to consensus great. If there is still 
+        disagreement the least definitive category is used (AKA 2 instead of 1, or 3 instead of 4)."
+    - This could be in admin panel
+ - List view displaying all observations and statuses
+    - This could be in admin panel
+ - Admin panel for Dave/Steph to edit anything else
+    - permissions for everything except what normal reviewers use
+
+
+>>>>>><<<<<<
+>>> CORE <<<
+>>>>>><<<<<<
+
+>>> Hosting <<<
+ - Git
+ - Database
+ - Static
+ - Media
+ - Debug 
+ - Other settings?
+ - DNS connection
+
+
+
+
+
+
+
+>>>>>>><<<<<<<
+>>> FUTURE <<<
+>>>>>>><<<<<<<
+
+>>> Styles <<<
+    - Can I pull "site-content" background
+    - Can I pull "masthead"/"site-header"/"banner" object
+
+>>> Frontend functionality <<<
+    - A nice image uploader
+    - A nice location system
+    - Hide password during create(?)
+
+>>> "Observer Source" FK in Submission <<<
+ - 'How did you find your way to this form'
+
+>>> Email User on Upload, with link to PublicObservationDetailView <<<
+
+>>> "Discount Review" and "Reason for Discounting" superuser options <<<
+ - Currently they can just delete - is that enough?
+
+
+
+
+
+>>>>>>>><<<<<<<<
+>>> COMPLETE <<<
+>>>>>>>><<<<<<<<
+
+DONE >>> Confirm core functions <<<
+
+NO >>> Sketch <<<
+
+DONE >>> Data models <<<
+
+DONE >>> Views, forms <<<
+Y - Add Dave's description text for each field from Google Form
+
+DONE >>> Templates <<<
+
+DONE >>> Admin templates <<<
+Y - Listview with ...
+Y - Only one review can be added per obs
+
+DONE >>> Styles <<<
+Y - Pull from main site
+
+DONE >>> Frontend Form(set) <<<
+Y - "Your" name on main form etc.
+Y - Image submission formset get and post
+
+DONE >>> Frontend functionality <<<
+Y - A nice datepicker
+
+DONE >>> How are new reviewer users added? <<<
+N - Dave can add username, pass, name, email, perms/group, staff status
+Y - I can make link where User can add themself
+Y   - This seems like a better idea
+Y   - But hard to permiss - can't put the genie back in the bottle
+Y   - Normal user link
+Y   - Superuser link
+Y - Add permissions to normal user
+Y   - Add/view/change Species
+Y   - Add Review
+Y   - Change observation?
+Y   - View observation
+Y - Reviewed by user in listview
+DONE >>> Make not everyone a superuser <<<
+Y - No editable fields in Observation admin except Add Review
+Y - Other Reviews not visible in admin
+Y>>> Permissions <<<
+Y - If all reviewing is done in admin panel then some things should have permissions to protect them
+Y - There could be two groups, a "Review" permission set and an "Manager" superuser permission set
+Y    - Actually the second is just "Is Superuser"
+
+DONE >>> Make some fixtures <<<
+N - Species
+N - Superusers?
+
+DONE >>> Leftover <<<
+Y - Data models
+N    - Decide how reviewer "Confidence" should work
+Y    - Make get_status better
+Y - Hide existing reviews under "collapse" (see admin fieldset docs)
+

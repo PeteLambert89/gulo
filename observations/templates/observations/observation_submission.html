@@ -1,0 +1,79 @@
+{% extends 'observations/base.html' %}
+
+
+{% block content %}
+<header class="entry-header">
+    <h1 class="entry-title">Wolverine Observations</h1>
+    <p>
+        Observations for Cascades Wolverine Project community science projects can be submitted here.
+    </p>
+    <p>
+        Photos and exact coordinates are optional but observations that include both are of much greater value.
+    </p>
+    <p>
+        Please direct questions to
+        <a href="mailto:info@cascadeswolverineproject.org">info@cascadeswolverineproject.org</a>. 
+        Find help documenting wolverine tracks on our 
+        <a href="https://cascadeswolverineproject.org/wp-content/uploads/2019/12/CWP-Gulo-observation-quick-guide.pdf">Observation Quick Guide</a>.
+    </p>
+    <p>
+        Thanks for your contribution!
+    </p>
+</header><!-- .entry-header -->
+
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+
+    {% for field in form %}
+    <p>
+        <label>
+            {% if field.field.required %}<b>{% endif %}
+                {{ field.label }}
+                {% if field.field.required %}</b>{% endif %}
+            {{ field.errors }}
+            <br>
+            {% if field.help_text %}
+            {{ field.help_text }}
+            <br>
+            {% endif %}
+            {{ field }}
+        </label>
+    </p>
+    {% endfor %}
+
+    <p>
+        <label>
+            {{ image_formset.management_form }}
+            {% for error in image_formset.errors %}
+            {{ error }}
+            {% endfor %}
+            <b>Upload Images</b>
+            <br>
+            Please include all of the images that you took even if they seem redundant to you--the more we have to look at the better. 
+            <br>
+            {% for image_form in image_formset %}
+            {{ image_form }}
+            {{ image_form.errors }}
+            <br>
+            {% endfor %}
+        </label>
+    </p>
+    
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
+
+{% block javascript %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $( function() {
+    $( "#id_date_of_observation" ).datepicker();
+    } );
+</script>
+{% endblock %}
+
+
+
+
