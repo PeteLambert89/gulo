@@ -8,10 +8,13 @@ executing==1.2.0
 ipython==8.6.0
 jedi==0.18.2
 matplotlib-inline==0.1.6
+mysqlclient==2.1.1
 parso==0.8.3
+pexpect==4.8.0
 pickleshare==0.7.5
 Pillow==9.3.0
 prompt-toolkit==3.0.33
+ptyprocess==0.7.0
 pure-eval==0.2.2
 Pygments==2.13.0
 six==1.16.0

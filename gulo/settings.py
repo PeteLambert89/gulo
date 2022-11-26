@@ -23,9 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-x(6hv_tz%az#g$3p&df0kf7q48i)ukqbroplxm&$bg!ey-t)dl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = CSRF_TRUSTED_ORIGINS = [
+    'petelambert.pythonanywhere.com',
+    'observations.cascadeswolverineproject.org',
+]
 
 
 # Application definition
@@ -75,9 +78,19 @@ WSGI_APPLICATION = 'gulo.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
+        "ENGINE": "django.db.backends.mysql",
+        # DB name or path to database file if using sqlite3.
+        "NAME": "PeteLambert$gulo",
+        # Not used with sqlite3.
+        "USER": "PeteLambert",
+        # Not used with sqlite3.
+        "PASSWORD": "appleipod",
+        # Set to empty string for localhost. Not used with sqlite3.
+        "HOST": "PeteLambert.mysql.pythonanywhere-services.com",
+        # Set to empty string for default. Not used with sqlite3.
+        "PORT": "",
     }
 }
 
@@ -106,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Vancouver'
 
 USE_I18N = True
 
@@ -115,10 +128,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-MEDIA_ROOT = 'media'
+MEDIA_ROOT = '/home/PeteLambert/personalprojects/gulo/media'
 MEDIA_URL = '/media/'
-STATIC_ROOT = 'static'
+STATIC_ROOT = '/home/PeteLambert/personalprojects/gulo/static'
 STATIC_URL = '/static/'
 
 # Default primary key field type
