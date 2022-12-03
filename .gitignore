@@ -2,7 +2,6 @@
 *.pot
 *.pyc
 __pycache__/
-static/
 media
 media/
 db.sqlite3
