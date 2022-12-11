@@ -102,7 +102,7 @@ class Observation(models.Model):
         return self.trackimage_set.count()
 
     def edit_button(self):
-        return format_html(f'<button class="button">Edit</button>')
+        return format_html(f'<span class="button">Edit</span>')
 
 
 class TrackImage(models.Model):
