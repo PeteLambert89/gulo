@@ -25,11 +25,13 @@ SECRET_KEY = 'django-insecure-x(6hv_tz%az#g$3p&df0kf7q48i)ukqbroplxm&$bg!ey-t)dl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = CSRF_TRUSTED_ORIGINS = [
+ALLOWED_HOSTS = [
     'petelambert.pythonanywhere.com',
     'observations.cascadeswolverineproject.org',
     'www.observations.cascadeswolverineproject.org',
 ]
+SCHEME = 'https://'
+CSRF_TRUSTED_ORIGINS = [SCHEME + host for host in ALLOWED_HOSTS]
 
 
 # Application definition

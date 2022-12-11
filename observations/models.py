@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.html import format_html
@@ -17,13 +19,13 @@ class Observation(models.Model):
     submission_date = models.DateTimeField(auto_now_add=True)
     observer_name = models.CharField(max_length=300)
     observer_email = models.EmailField(
-        help_text='Please include the best email address to follow up with questions or '
+        help_text = 'Please include the best email address to follow up with questions or '
         'information about the observation being submitted.'
     )
     date_of_observation = models.DateField()
     observation_type = models.CharField(
         'Footprints or Animal Observation',
-        max_length = 2,
+        max_length = 1,
         choices = choices.ObservationTypes.choices,
     )
     location = models.CharField(
@@ -51,8 +53,15 @@ class Observation(models.Model):
         help_text = 'Enter in feet'
     )
     observation_narrative = models.TextField(
-        help_text='Record a short summary of the setting and details of the track or animal observation '
+        help_text ='Record a short summary of the setting and details of the track or animal observation '
         'you are reporting'
+    )
+    photo_permission = models.CharField(
+        help_text = 'Do you grant Cascades Wolverine Project permission to share your images publicly on our website or '
+        'social media? (Photo will be credited to the name submitted in this form unless you ask for something '
+        'different in the notes above)',
+        max_length = 1,
+        choices = choices.PhotoReleaseChoices.choices,
     )
 
     def __str__(self):
@@ -92,11 +101,26 @@ class Observation(models.Model):
     def images(self):
         return self.trackimage_set.count()
 
+    def edit_button(self):
+        return format_html(f'<button class="button">Edit</button>')
+
 
 class TrackImage(models.Model):
-    """ Supporting images of tracks for each observation. """
+    """ Supporting files (images, videos, ...) of tracks for each observation. """
     observation = models.ForeignKey(Observation, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='track_images/%Y-%m-%d--%H-%M/')
+    file = models.FileField(upload_to='track_images/%Y-%m-%d--%H-%M/')
+
+    def view(self):
+        extension = os.path.splitext(self.file.url)[1]
+        if self.file:
+            if extension in constants.VIEWABLE_EXTENSIONS:
+                content = f"<img src='{self.file.url}' style='max-width:{constants.TRACK_IMAGE_DISPLAY_WIDTH}px' />"
+            else:
+                content = f"<button class='button'>Download</button>"
+            return format_html(f"<a href='{self.file.url}' target='_blank'>{content}</a>")
+        else:
+            return "-"
+    view.allow_tags = True
 
 
 class Species(models.Model):
@@ -116,7 +140,19 @@ class Review(models.Model):
     observation = models.ForeignKey(Observation, on_delete=models.CASCADE)
     reviewed_by = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
-    suspected_species = models.ForeignKey(Species, on_delete=models.CASCADE)
+    track_identification_score = models.IntegerField(
+        help_text = 'Category 1: Definitive Wolverine. Category 2: Likely Wolverine. '
+        'Category 3: Identity unknown (possibly wolverine). Category 4: Not a wolverine. '
+        'Refer to these guidelines for category descriptions: '
+        'https://drive.google.com/file/d/1UKgzsZ59fBdTuXp5VNV0Z38Hpm-R5-AO/view?usp=sharing',
+        choices = choices.TrackIdentificationScoreChoices.choices,
+    )
+    suspected_species = models.ForeignKey(
+        Species, 
+        on_delete=models.CASCADE,
+        help_text = '(If not a wolverine)',
+    )
+
     notes = models.TextField()
 
     class Meta:

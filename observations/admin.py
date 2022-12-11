@@ -6,6 +6,7 @@ from observations import forms, models
 class TrackImageInline(admin.TabularInline):
     model = models.TrackImage
     extra = 3
+    readonly_fields = ['view']
 
 
 class ReviewInline(admin.TabularInline):
@@ -36,6 +37,7 @@ class ObservationAdmin(admin.ModelAdmin):
             return observation.reviewed_by_user(request.user)
 
         return [
+            'edit_button',
             'id', 
             'submission_date',
             'observer_name',

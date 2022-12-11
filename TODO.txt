@@ -17,15 +17,19 @@
 >>> CORE <<<
 >>>>>><<<<<<
 
->>> Hosting <<<
- - Git
- - Database
- - Static
- - Media
- - Debug 
- - Other settings?
- - DNS connection
+>>> Select all on track diagnostic features <<<
 
+>>> CSV <<<
+ - csv download, files as url links
+ - allow upload as well (for past data)
+
+>>> Email Notifications <<<
+ - They want emails when reviews come in
+     — Might have to set up an email for this
+ - Make flexible enough to send other types of emails
+
+>>> Possible, unlikely <<<
+ - Admin file click as new tab
 
 
 
@@ -37,6 +41,7 @@
 >>>>>>><<<<<<<
 
 >>> Styles <<<
+    - Add page titles
     - Can I pull "site-content" background
     - Can I pull "masthead"/"site-header"/"banner" object
 
@@ -52,6 +57,10 @@
 
 >>> "Discount Review" and "Reason for Discounting" superuser options <<<
  - Currently they can just delete - is that enough?
+
+>>> List Filters <<<
+ - Not reviewed by me
+ - By Status
 
 
 
@@ -117,3 +126,35 @@ N    - Decide how reviewer "Confidence" should work
 Y    - Make get_status better
 Y - Hide existing reviews under "collapse" (see admin fieldset docs)
 
+DONE >>> Hosting <<<
+Y - Git
+Y - Database
+Y - Static
+Y - Media
+Y - Debug 
+Y - Other settings?
+Y - DNS connection
+
+DONE >>> Finish <<<
+Y - Sketch email to Dave
+Y - Send email to Dave
+
+DONE >>> Frontend Feedback <<<
+Y    Photo Release question:
+Y    Do you grant Cascades Wolverine Project permission to share your images publicly on our website or social media. (Photo will be credited to the name submitted in this form unless you ask for something different in the notes field of this form)
+Y    YES
+Y    NO
+Y    PLEASE CONTACT ME BEFORE USE
+Y - Imagefield - Allow all files. And say "Upload Images or Videos"
+N    - Rename from TrackImage to ..?
+CANT REPRODUCE - CSRF when Dave tried to add a reviewer while logged in 
+
+DONE >>> Easy backend wins <<<
+Y - Change ID# Link to a button*
+
+DONE >>> Update Review process <<<
+Y - As per https://docs.google.com/forms/d/e/1FAIpQLSf93qqBlz3UqjAJFW6AvxGLekWII0tdY-s3-kw6FGmGBLYZLg/viewform
+Y - Reviewers enter a couple pieces of info: *
+Y    — 4 Categories, 1,2,3,4 (instead of "suspected species")
+Y    — Suspected species still there, but with hint: "(If not a wolverine)"
+Y        —- Actually: If this is a 3 or a 4, what species is most likely for this to be

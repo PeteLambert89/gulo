@@ -1,0 +1,3 @@
+cd "documents/work/code/gulo"
+workon gulo
+set DJANGO_SETTINGS_MODULE=gulo.development_settings

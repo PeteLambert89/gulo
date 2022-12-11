@@ -4,6 +4,8 @@ from gulo.settings import *
 ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
+SCHEME = 'http://'
+CSRF_TRUSTED_ORIGINS = [SCHEME + host for host in ALLOWED_HOSTS]
 
 DEBUG = True
 
