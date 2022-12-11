@@ -3,6 +3,7 @@ import os
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.html import format_html
+from multiselectfield import MultiSelectField
 
 from observations import choices, constants
 
@@ -83,8 +84,8 @@ class Observation(models.Model):
         if reviews.count() < constants.MINIMUM_REVIEWS:
             text = 'Waiting for reviews'
             colour = 'black'
-        elif all(review.suspected_species == reviews[0].suspected_species for review in reviews):
-            text = f'Confirmed: {reviews[0].suspected_species}'
+        elif all(review.identification_score == reviews[0].identification_score for review in reviews):
+            text = f'Confirmed: {reviews[0].get_identification_score_display()}'
             colour = 'green'
         else:
             text = 'Inconclusive, discuss and find consensus'
@@ -140,17 +141,24 @@ class Review(models.Model):
     observation = models.ForeignKey(Observation, on_delete=models.CASCADE)
     reviewed_by = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
-    track_identification_score = models.IntegerField(
+    identification_score = models.IntegerField(
         help_text = 'Category 1: Definitive Wolverine. Category 2: Likely Wolverine. '
         'Category 3: Identity unknown (possibly wolverine). Category 4: Not a wolverine. '
         'Refer to these guidelines for category descriptions: '
         'https://drive.google.com/file/d/1UKgzsZ59fBdTuXp5VNV0Z38Hpm-R5-AO/view?usp=sharing',
         choices = choices.TrackIdentificationScoreChoices.choices,
     )
+    diagnostic_features = MultiSelectField(
+        help_text = 'If tracks are "1. Definitive Wolverine" what did you observe?',
+        choices = choices.DiagnosticFeaturesChoices,
+        max_length = 10,
+        blank = True,
+        null = True,
+    )
     suspected_species = models.ForeignKey(
         Species, 
         on_delete=models.CASCADE,
-        verbose_name = 'Suspected Species (If not a wolverine)',
+        help_text = 'If not a wolverine',
         null = True,
         blank = True
     )
@@ -159,3 +167,6 @@ class Review(models.Model):
 
     class Meta:
         unique_together = ['observation', 'reviewed_by']
+
+    def __str__(self):
+        return f'By {self.reviewed_by.first_name} {self.reviewed_by.last_name} - Global #{self.pk}'

@@ -18,3 +18,12 @@ class TrackIdentificationScoreChoices(models.IntegerChoices):
     TWO = 2, '2. Likely Wolverine'
     THREE = 3, '3. Identify Unknown'
     FOUR = 4, '4. Not a Wolverine'
+
+
+DiagnosticFeaturesChoices = (
+    (1, 'Size range is correct'),
+    (2, 'Overall shape of individual tracks is correct'),
+    (3, 'All details in clear print are correct for the morphology of a wolverine foot'),
+    (4, 'Track pattern and size is diagnostic for only a wolverine'),
+    (5, 'There are no features in individual tracks or trail that counter-indicate a wolverine')
+)

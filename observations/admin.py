@@ -9,7 +9,7 @@ class TrackImageInline(admin.TabularInline):
     readonly_fields = ['view']
 
 
-class ReviewInline(admin.TabularInline):
+class ReviewInline(admin.StackedInline):
     model = models.Review
     extra = 0
     readonly_fields = ['reviewed_by']

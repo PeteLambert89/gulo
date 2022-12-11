@@ -17,23 +17,18 @@
 >>> CORE <<<
 >>>>>><<<<<<
 
->>> Select all on track diagnostic features <<<
+>>> Email Notifications <<<
+ - https://docs.djangoproject.com/en/4.1/topics/email/
+ - They want emails when reviews come in
+     — Might have to set up an email for this
+ - Make flexible enough to send other types of emails
 
 >>> CSV <<<
  - csv download, files as url links
  - allow upload as well (for past data)
 
->>> Email Notifications <<<
- - They want emails when reviews come in
-     — Might have to set up an email for this
- - Make flexible enough to send other types of emails
-
 >>> Possible, unlikely <<<
  - Admin file click as new tab
-
-
-
-
 
 
 >>>>>>><<<<<<<
@@ -158,3 +153,5 @@ Y - Reviewers enter a couple pieces of info: *
 Y    — 4 Categories, 1,2,3,4 (instead of "suspected species")
 Y    — Suspected species still there, but with hint: "(If not a wolverine)"
 Y        —- Actually: If this is a 3 or a 4, what species is most likely for this to be
+
+DONE >>> Select all on track diagnostic features <<<
