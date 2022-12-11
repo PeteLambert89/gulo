@@ -151,6 +151,8 @@ class Review(models.Model):
         Species, 
         on_delete=models.CASCADE,
         verbose_name = 'Suspected Species (If not a wolverine)',
+        null = True,
+        blank = True
     )
 
     notes = models.TextField()
