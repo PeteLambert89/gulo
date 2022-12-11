@@ -150,7 +150,7 @@ class Review(models.Model):
     suspected_species = models.ForeignKey(
         Species, 
         on_delete=models.CASCADE,
-        help_text = '(If not a wolverine)',
+        verbose_name = 'Suspected Species (If not a wolverine)',
     )
 
     notes = models.TextField()
